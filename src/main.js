@@ -23,13 +23,14 @@ scene.background = new THREE.Color(0x87ceeb); // Light sky blue background
 
 camera = new THREE.PerspectiveCamera( 75, 800 / 600, 0.1, 1000 );
 
+
 renderer = new THREE.WebGLRenderer({
   canvas: c1,
   antialias: true 
 });
 renderer.setSize( 800, 600 );
 renderer.setAnimationLoop( animate );
-document.body.appendChild( renderer.domElement );
+// No need to append renderer.domElement, canvas is already in HTML
 loader = new GLTFLoader();
 
 
