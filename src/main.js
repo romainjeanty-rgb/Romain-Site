@@ -1,5 +1,11 @@
 import * as THREE from 'three';
+
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+const textureLoader = new THREE.TextureLoader();
+let colormapTexture = null;
+textureLoader.load('/public/colormap.png', function (texture) {
+  colormapTexture = texture;
+});
 
 
 let scene, camera, renderer, loader;
@@ -35,6 +41,15 @@ let bounds = 3;
 loader.load( '/public/models/character-male-a.glb', function ( gltf ) {
   model = gltf.scene;
   model.position.set(0, 0, 0);
+  // Apply the texture to all meshes in the model
+  if (colormapTexture) {
+    model.traverse((child) => {
+      if (child.isMesh) {
+        child.material.map = colormapTexture;
+        child.material.needsUpdate = true;
+      }
+    });
+  }
   scene.add( model );
 }, undefined, function ( error ) {
   console.error( error );
@@ -48,6 +63,15 @@ function animate() {
     if (model.position.x > bounds || model.position.x < -bounds) {
       direction *= -1;
       model.rotation.y += Math.PI; // Turn around
+    }
+    // If the texture wasn't loaded at model load, apply it now
+    if (colormapTexture) {
+      model.traverse((child) => {
+        if (child.isMesh && child.material.map !== colormapTexture) {
+          child.material.map = colormapTexture;
+          child.material.needsUpdate = true;
+        }
+      });
     }
   }
   renderer.render( scene, camera );
