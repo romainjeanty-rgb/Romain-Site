@@ -1,12 +1,11 @@
 import * as THREE from 'three';
-
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
 const textureLoader = new THREE.TextureLoader();
 let colormapTexture = null;
 textureLoader.load('/public/colormap.png', function (texture) {
   colormapTexture = texture;
 });
-
 
 let scene, camera, renderer, loader;
 
