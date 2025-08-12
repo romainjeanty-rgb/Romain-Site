@@ -38,7 +38,7 @@ loader.load( '/public/models/character-male-a.glb', function ( gltf ) {
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 const material = new THREE.MeshBasicMaterial( { color: 0x01ff00 } );
 const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
+//scene.add( cube );
 
 camera.position.z = 5;
 
