@@ -41,7 +41,7 @@ let bounds = 3;
 
 loader.load( '/public/models/character-male-a.glb', function ( gltf ) {
   model = gltf.scene;
-  model.position.set(0, 0, 0);
+  model.position.set(0, 1, -1);
   // Apply the texture to all meshes in the model
   if (colormapTexture) {
     model.traverse((child) => {
