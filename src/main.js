@@ -1,14 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-loader.load( '/public/models/character-male-a.glb', function ( gltf ) {
 
-  scene.add( gltf.scene );
-
-}, undefined, function ( error ) {
-
-  console.error( error );
-
-} );
 
 let scene, camera, renderer, loader;
 
@@ -33,6 +25,15 @@ renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 loader = new GLTFLoader();
 
+loader.load( '/public/models/character-male-a.glb', function ( gltf ) {
+
+  scene.add( gltf.scene );
+
+}, undefined, function ( error ) {
+
+  console.error( error );
+
+} );
 
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 const material = new THREE.MeshBasicMaterial( { color: 0x01ff00 } );
