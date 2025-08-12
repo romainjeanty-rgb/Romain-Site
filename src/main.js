@@ -1,5 +1,17 @@
 import * as THREE from 'three';
-let scene, camera, renderer, mesh;
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+loader.load( '/public/models/character-male-a.glb', function ( gltf ) {
+
+  scene.add( gltf.scene );
+
+}, undefined, function ( error ) {
+
+  console.error( error );
+
+} );
+
+let scene, camera, renderer, loader;
+
 
 
 const c1 = document.getElementById('fish')
@@ -19,6 +31,7 @@ renderer = new THREE.WebGLRenderer({
 renderer.setSize( 800, 600 );
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
+loader = new GLTFLoader();
 
 
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
