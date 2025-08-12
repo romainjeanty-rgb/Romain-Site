@@ -13,6 +13,7 @@ console.log( rect.innerWidth)
 console.log( rect.innerHeight)
 
 scene = new THREE.Scene();
+scene.background = new THREE.Color(0x87ceeb); // Light sky blue background
 
 camera = new THREE.PerspectiveCamera( 75, 800 / 600, 0.1, 1000 );
 
