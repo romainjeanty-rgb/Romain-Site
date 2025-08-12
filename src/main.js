@@ -59,21 +59,5 @@ loader.load( '/public/models/character-male-a.glb', function ( gltf ) {
 
 function animate() {
   // Move the model left and right
-  if (model) {
-    model.position.x += speed * direction;
-    if (model.position.x > bounds || model.position.x < -bounds) {
-      direction *= -1;
-      model.rotation.y += Math.PI; // Turn around
-    }
-    // If the texture wasn't loaded at model load, apply it now
-    if (colormapTexture) {
-      model.traverse((child) => {
-        if (child.isMesh && child.material.map !== colormapTexture) {
-          child.material.map = colormapTexture;
-          child.material.needsUpdate = true;
-        }
-      });
-    }
-  }
   renderer.render( scene, camera );
 }
