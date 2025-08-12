@@ -26,28 +26,29 @@ renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 loader = new GLTFLoader();
 
+
+let model;
+let direction = 1;
+let speed = 0.02;
+let bounds = 3;
+
 loader.load( '/public/models/character-male-a.glb', function ( gltf ) {
-
-  scene.add( gltf.scene );
-
+  model = gltf.scene;
+  model.position.set(0, 0, 0);
+  scene.add( model );
 }, undefined, function ( error ) {
-
   console.error( error );
-
 } );
 
-const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const material = new THREE.MeshBasicMaterial( { color: 0x01ff00 } );
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
-
-camera.position.z = 5;
 
 function animate() {
-
-	cube.rotation.x += 0.08;
-	cube.rotation.y += 0.08;
-
-	renderer.render( scene, camera );
-
+  // Move the model left and right
+  if (model) {
+    model.position.x += speed * direction;
+    if (model.position.x > bounds || model.position.x < -bounds) {
+      direction *= -1;
+      model.rotation.y += Math.PI; // Turn around
+    }
+  }
+  renderer.render( scene, camera );
 }
